@@ -19,6 +19,12 @@ class MainView: UIView {
         return image
     }()
     
+    public lazy var promptLabel: UILabel = {
+        let prompt = UILabel()
+        prompt.text = gamePrompt
+        return prompt
+    }()
+    
     public lazy var scoreLabel: UILabel = {
         let score = UILabel()
         score.text = "\(scoreNum)"
@@ -26,17 +32,22 @@ class MainView: UIView {
         return score
     }()
     
-    public lazy var promptLabel: UILabel =  {
-    let prompt = UILabel()
-        prompt.text = gamePrompt
-        return prompt
-    }()
     
     public lazy var stackView: UIStackView = {
         let stack = UIStackView(arrangedSubviews: buttonsLoad())
+        stack.axis = .horizontal
+        stack.distribution = .fillEqually
+        stack.alignment = .fill
+        stack.spacing = 20
         return stack
     }()
     
+    public lazy var resetButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Reset", for: .normal)
+        button.backgroundColor = .systemRed
+        return button
+    }()
     
     
     override init(frame: CGRect){
@@ -51,10 +62,10 @@ class MainView: UIView {
     
     private func commonInit() {
         
-        setUpLabelConstraints()
         setUpImageViewConstraints()
-        setUpScoreLabelConstraints()
+        setUpPromptConstraints()
         setUpStackViewConstraints()
+        setUpScoreLabelConstraints()
     }
     
     var randomRed = CGFloat.random(in: 0...1)
@@ -75,8 +86,11 @@ class MainView: UIView {
         let greenButton = UIButton()
         let blueButton = UIButton()
         redButton.backgroundColor = UIColor(red: 1.0, green: 0.0, blue: 0.0, alpha: 1.0)
+        redButton.setTitle("Red", for: .normal)
         greenButton.backgroundColor = UIColor(red: 0.0, green: 1.0, blue: 0.0, alpha: 1.0)
+        greenButton.setTitle("Green", for: .normal)
         blueButton.backgroundColor = UIColor(red: 0.0, green: 0.0, blue: 1.0, alpha: 1.0)
+        blueButton.setTitle("Blue", for: .normal)
         buttonArr.append(redButton)
         buttonArr.append(greenButton)
         buttonArr.append(blueButton)
@@ -96,12 +110,29 @@ class MainView: UIView {
         ])
     }
     
-    private func setUpStackViewConstraints() {
+    private func setUpPromptConstraints() {
+        addSubview(promptLabel)
         
+        promptLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            promptLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 20),
+            promptLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
+            promptLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20)
+        ])
     }
     
-    private func setUpLabelConstraints() {
+    private func setUpStackViewConstraints() {
+        addSubview(stackView)
         
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            stackView.topAnchor.constraint(equalTo: promptLabel.bottomAnchor, constant: 40),
+            stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
+            stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
+            stackView.heightAnchor.constraint(equalTo: safeAreaLayoutGuide.heightAnchor, multiplier: 0.1)
+        ])
     }
     
     private func setUpScoreLabelConstraints() {
