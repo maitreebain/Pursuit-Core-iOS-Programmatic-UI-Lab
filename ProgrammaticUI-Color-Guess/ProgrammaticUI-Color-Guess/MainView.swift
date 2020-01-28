@@ -12,11 +12,12 @@ class MainView: UIView {
     
     public lazy var imageView: UIImageView = {
         let image = UIImageView()
+        image.backgroundColor = myColor()
         return image
     }()
     
     
-
+    
     override init(frame: CGRect){
         super.init(frame: UIScreen.main.bounds)
         commonInit()
@@ -31,6 +32,17 @@ class MainView: UIView {
         
     }
     
+    var randomRed = CGFloat.random(in: 0...1)
+    var randomBlue = CGFloat.random(in: 0...1)
+    var randomGreen = CGFloat.random(in: 0...1)
+    
+    func myColor() -> UIColor {
+        randomRed = CGFloat.random(in: 0...1)
+        randomBlue = CGFloat.random(in: 0...1)
+        randomGreen = CGFloat.random(in: 0...1)
+        let randomColor = UIColor.init(red: randomRed, green: randomGreen, blue: randomBlue, alpha: 1)
+        return randomColor
+    }
     
     private func setUpImageViewConstraints() {
         
@@ -47,5 +59,5 @@ class MainView: UIView {
     private func setUpScoreLabelConstraints() {
         
     }
-
+    
 }
