@@ -9,11 +9,18 @@
 import UIKit
 
 class MainsViewController: UIViewController {
+    
+    private let mainView = MainView()
 
+    override func loadView() {
+        view = mainView
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = .blue
+        loadView()
     }
 
 

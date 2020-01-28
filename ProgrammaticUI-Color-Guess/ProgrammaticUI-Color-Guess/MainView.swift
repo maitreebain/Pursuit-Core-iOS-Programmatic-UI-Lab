@@ -84,7 +84,16 @@ class MainView: UIView {
     }
     
     private func setUpImageViewConstraints() {
+        addSubview(imageView)
         
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            imageView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 20),
+            imageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
+            imageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
+            imageView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.4)
+        ])
     }
     
     private func setUpStackViewConstraints() {
