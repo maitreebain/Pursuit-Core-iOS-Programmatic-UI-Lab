@@ -8,9 +8,6 @@
 
 import UIKit
 
-struct AppKey {
-    static let imageColorKey = "image Color"
-}
 
 class MainView: UIView {
     
@@ -83,7 +80,6 @@ class MainView: UIView {
         randomBlue = CGFloat.random(in: 0...1)
         randomGreen = CGFloat.random(in: 0...1)
         let randomColor = UIColor.init(red: randomRed, green: randomGreen, blue: randomBlue, alpha: 1)
-        UserDefaults.standard.set(randomColor, forKey: AppKey.imageColorKey)
         return randomColor
     }
     
