@@ -8,7 +8,6 @@
 
 import UIKit
 
-
 class MainView: UIView {
     
     let gamePrompt = "Pick a color most related to the options below: "
@@ -33,7 +32,7 @@ class MainView: UIView {
     
     public lazy var scoreLabel: UILabel = {
         let score = UILabel()
-        score.text = "Score: \(scoreNum)"
+        //score.text = "Score: \(scoreNum)"
         score.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
         score.textAlignment = .center
         return score

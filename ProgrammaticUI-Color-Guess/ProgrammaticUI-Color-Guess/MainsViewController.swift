@@ -14,7 +14,6 @@ class MainsViewController: UIViewController {
     
     override func loadView() {
         view = mainView
-        buttonsConfiguration()
     }
     
     
@@ -23,7 +22,8 @@ class MainsViewController: UIViewController {
         
         view.backgroundColor = .systemGray5
         loadView()
-        
+        buttonsConfiguration()
+        mainView.stackView.isUserInteractionEnabled = true
     }
     
     //put function to load
@@ -31,6 +31,7 @@ class MainsViewController: UIViewController {
         for button in mainView.buttonArr {
             button.addTarget(self, action: #selector(buttonColorChoice(_:)), for: .touchUpInside)
         }
+                    print("button pressed")
     }
     
     
@@ -48,21 +49,21 @@ class MainsViewController: UIViewController {
         case 0:
             if max(mainView.randomRed, mainView.randomBlue, mainView.randomGreen) == mainView.randomRed{
                 print("red")
-                mainView.scoreNum += 1
+                updateScore()
             } else {
                 present(alertController, animated: true)
             }
         case 1:
             if max(mainView.randomRed, mainView.randomBlue, mainView.randomGreen) == mainView.randomGreen {
                 print("green")
-                mainView.scoreNum += 1
+                updateScore()
             } else {
                            present(alertController, animated: true)
                        }
         case 2:
             if max(mainView.randomRed, mainView.randomBlue, mainView.randomGreen) == mainView.randomBlue {
                 print("blue")
-                mainView.scoreNum += 1
+                updateScore()
             } else {
                            present(alertController, animated: true)
                        }
@@ -73,6 +74,8 @@ class MainsViewController: UIViewController {
         for button in mainView.buttonArr{
             button.isEnabled = false
         }
+        
+        
         /*
          maxScore = score
          highScore.text = "High Score: \(maxScore)"
@@ -87,6 +90,11 @@ class MainsViewController: UIViewController {
     
     private func resetAction() {
         
+    }
+    
+    private func updateScore() {
+        mainView.scoreNum += 1
+        mainView.scoreLabel.text = "Score: \(mainView.scoreNum)"
     }
     
 }
