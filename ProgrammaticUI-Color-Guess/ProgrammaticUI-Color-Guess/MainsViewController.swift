@@ -34,6 +34,14 @@ class MainsViewController: UIViewController {
                     print("button pressed")
     }
     
+    /*
+     private func updateAppColor() {
+         if let colorName = UserDefaults.standard.object(forKey: AppKey.appColorKey) as? String {
+             view.backgroundColor = UIColor(named: colorName)
+         }
+     }
+     */
+    
     
     @objc private func buttonColorChoice(_ sender: UIButton){
         buttonsConfiguration()
@@ -71,10 +79,7 @@ class MainsViewController: UIViewController {
             print("no way")
         }
         
-        for button in mainView.buttonArr{
-            button.isEnabled = false
-        }
-        
+        mainView.imageView.backgroundColor = mainView.myColor()
         
         /*
          maxScore = score
