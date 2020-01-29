@@ -16,6 +16,7 @@ class MainsViewController: UIViewController {
         view = mainView
     }
     
+    var win = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,14 +32,14 @@ class MainsViewController: UIViewController {
         for button in mainView.buttonArr {
             button.addTarget(self, action: #selector(buttonColorChoice(_:)), for: .touchUpInside)
         }
-                    print("button pressed")
+        print("button pressed")
     }
     
     /*
      private func updateAppColor() {
-         if let colorName = UserDefaults.standard.object(forKey: AppKey.appColorKey) as? String {
-             view.backgroundColor = UIColor(named: colorName)
-         }
+     if let colorName = UserDefaults.standard.object(forKey: AppKey.appColorKey) as? String {
+     view.backgroundColor = UIColor(named: colorName)
+     }
      }
      */
     
@@ -49,7 +50,10 @@ class MainsViewController: UIViewController {
         let playAgain = UIAlertAction(title: "Yes", style: .default) { (alertAction) in
             self.resetAction()
         }
-        let leaveGame = UIAlertAction(title: "No", style: .cancel)
+        let leaveGame = UIAlertAction(title: "No", style: .default) { (alertAction) in
+            self.leave()
+            self.mainView.imageView.backgroundColor = .black
+        }
         alertController.addAction(playAgain)
         alertController.addAction(leaveGame)
         
@@ -58,6 +62,7 @@ class MainsViewController: UIViewController {
             if max(mainView.randomRed, mainView.randomBlue, mainView.randomGreen) == mainView.randomRed{
                 print("red")
                 updateScore()
+                win = true
             } else {
                 present(alertController, animated: true)
             }
@@ -65,16 +70,18 @@ class MainsViewController: UIViewController {
             if max(mainView.randomRed, mainView.randomBlue, mainView.randomGreen) == mainView.randomGreen {
                 print("green")
                 updateScore()
+                win = true
             } else {
-                           present(alertController, animated: true)
-                       }
+                present(alertController, animated: true)
+            }
         case 2:
             if max(mainView.randomRed, mainView.randomBlue, mainView.randomGreen) == mainView.randomBlue {
                 print("blue")
                 updateScore()
+                win = true
             } else {
-                           present(alertController, animated: true)
-                       }
+                present(alertController, animated: true)
+            }
         default:
             print("no way")
         }
@@ -96,6 +103,14 @@ class MainsViewController: UIViewController {
     private func resetAction() {
         
     }
+    
+    private func leave() {
+        for button in mainView.buttonArr {
+            button.isEnabled = false
+            button.titleLabel?.text = ""
+        }
+    }
+    
     
     private func updateScore() {
         mainView.scoreNum += 1
