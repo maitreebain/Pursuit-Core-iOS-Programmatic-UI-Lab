@@ -71,6 +71,7 @@ class MainsViewController: UIViewController {
                 win = true
             } else {
                 present(alertController, animated: true)
+                
             }
         default:
             print("no way")
@@ -80,7 +81,14 @@ class MainsViewController: UIViewController {
     
     
     private func resetAction() {
+        mainView.scoreNum = 0
+        mainView.scoreLabel.text = "Score: \(mainView.scoreNum)"
         
+        for button in mainView.buttonArr {
+            button.isEnabled = true
+        }
+        
+        mainView.imageView.backgroundColor = mainView.myColor()
     }
     
     private func leave() {
