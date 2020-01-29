@@ -28,50 +28,60 @@ class MainsViewController: UIViewController {
     
     //put function to load
     private func buttonsConfiguration() {
-        mainView.redButton.addTarget(self, action: #selector(buttonColorChoice(_:)), for: .touchUpInside)
-        mainView.greenButton.addTarget(self, action: #selector(buttonColorChoice(_:)), for: .touchUpInside)
-        mainView.blueButton.addTarget(self, action: #selector(buttonColorChoice(_:)), for: .touchUpInside)
+        for button in mainView.buttonArr {
+            button.addTarget(self, action: #selector(buttonColorChoice(_:)), for: .touchUpInside)
+        }
     }
     
     
     @objc private func buttonColorChoice(_ sender: UIButton){
         buttonsConfiguration()
-        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
-        let winAlert = UIAlertAction(title: "You win!", style: .default) { (alertAction) in
+        let alertController = UIAlertController(title: "You lost!", message: "Would you like to play again?", preferredStyle: .alert)
+        let playAgain = UIAlertAction(title: "Yes", style: .default) { (alertAction) in
             self.resetAction()
         }
-        let loseAlert = UIAlertAction(title: "You lose!", style: .default) { (alertAction) in
-            self.resetAction()
-        }
-        alertController.addAction(winAlert)
-        alertController.addAction(loseAlert)
+        let leaveGame = UIAlertAction(title: "No", style: .cancel)
+        alertController.addAction(playAgain)
+        alertController.addAction(leaveGame)
         
         switch sender.tag{
         case 0:
             if max(mainView.randomRed, mainView.randomBlue, mainView.randomGreen) == mainView.randomRed{
                 print("red")
-                
+                mainView.scoreNum += 1
+            } else {
+                present(alertController, animated: true)
             }
         case 1:
             if max(mainView.randomRed, mainView.randomBlue, mainView.randomGreen) == mainView.randomGreen {
                 print("green")
-            }
+                mainView.scoreNum += 1
+            } else {
+                           present(alertController, animated: true)
+                       }
         case 2:
             if max(mainView.randomRed, mainView.randomBlue, mainView.randomGreen) == mainView.randomBlue {
                 print("blue")
-            }
+                mainView.scoreNum += 1
+            } else {
+                           present(alertController, animated: true)
+                       }
         default:
             print("no way")
-            /*
-             maxScore = score
-             highScore.text = "High Score: \(maxScore)"
-             if maxScore > score {
-             highScore.text = "High Score: \(maxScore)"
-             } else if score > maxScore {
-             maxScore = score
-             }
-             */
         }
+        
+        for button in mainView.buttonArr{
+            button.isEnabled = false
+        }
+        /*
+         maxScore = score
+         highScore.text = "High Score: \(maxScore)"
+         if maxScore > score {
+         highScore.text = "High Score: \(maxScore)"
+         } else if score > maxScore {
+         maxScore = score
+         }
+         */
     }
     
     
