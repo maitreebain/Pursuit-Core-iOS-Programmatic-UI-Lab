@@ -27,8 +27,9 @@ class MainView: UIView {
     
     public lazy var scoreLabel: UILabel = {
         let score = UILabel()
-        score.text = "\(scoreNum)"
+        score.text = "Score: \(scoreNum)"
         score.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
+        score.textAlignment = .center
         return score
     }()
     
@@ -66,6 +67,7 @@ class MainView: UIView {
         setUpPromptConstraints()
         setUpStackViewConstraints()
         setUpScoreLabelConstraints()
+        setUpResetButtonConstraints()
     }
     
     var randomRed = CGFloat.random(in: 0...1)
@@ -136,7 +138,26 @@ class MainView: UIView {
     }
     
     private func setUpScoreLabelConstraints() {
+        addSubview(scoreLabel)
         
+        scoreLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            scoreLabel.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 40),
+            scoreLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
+            scoreLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20)
+        ])
     }
     
+    
+    private func setUpResetButtonConstraints() {
+        addSubview(resetButton)
+        
+        resetButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            resetButton.topAnchor.constraint(equalTo: scoreLabel.bottomAnchor, constant: 60),
+            resetButton.centerXAnchor.constraint(equalTo: centerXAnchor)
+        ])
+    }
 }
