@@ -8,6 +8,10 @@
 
 import UIKit
 
+struct AppKey {
+    static let imageColorKey = "image Color"
+}
+
 class MainView: UIView {
     
     let gamePrompt = "Pick a color most related to the options below: "
@@ -79,6 +83,7 @@ class MainView: UIView {
         randomBlue = CGFloat.random(in: 0...1)
         randomGreen = CGFloat.random(in: 0...1)
         let randomColor = UIColor.init(red: randomRed, green: randomGreen, blue: randomBlue, alpha: 1)
+        UserDefaults.standard.set(randomColor, forKey: AppKey.imageColorKey)
         return randomColor
     }
     
@@ -89,10 +94,13 @@ class MainView: UIView {
         let blueButton = UIButton()
         redButton.backgroundColor = UIColor(red: 1.0, green: 0.0, blue: 0.0, alpha: 1.0)
         redButton.setTitle("Red", for: .normal)
+        redButton.tag = 0
         greenButton.backgroundColor = UIColor(red: 0.0, green: 1.0, blue: 0.0, alpha: 1.0)
         greenButton.setTitle("Green", for: .normal)
+        greenButton.tag = 1
         blueButton.backgroundColor = UIColor(red: 0.0, green: 0.0, blue: 1.0, alpha: 1.0)
         blueButton.setTitle("Blue", for: .normal)
+        blueButton.tag = 2
         buttonArr.append(redButton)
         buttonArr.append(greenButton)
         buttonArr.append(blueButton)
