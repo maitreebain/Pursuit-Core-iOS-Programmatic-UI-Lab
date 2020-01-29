@@ -14,6 +14,11 @@ class MainView: UIView {
     let gamePrompt = "Pick a color most related to the options below: "
     var scoreNum = 0
     
+    var buttonArr = [UIButton]()
+    let redButton = UIButton()
+    let greenButton = UIButton()
+    let blueButton = UIButton()
+    
     public lazy var imageView: UIImageView = {
         let image = UIImageView()
         image.backgroundColor = myColor()
@@ -34,7 +39,6 @@ class MainView: UIView {
         return score
     }()
     
-    
     public lazy var stackView: UIStackView = {
         let stack = UIStackView(arrangedSubviews: buttonsLoad())
         stack.axis = .horizontal
@@ -42,13 +46,6 @@ class MainView: UIView {
         stack.alignment = .fill
         stack.spacing = 20
         return stack
-    }()
-    
-    public lazy var resetButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("Reset", for: .normal)
-        button.backgroundColor = .systemRed
-        return button
     }()
     
     
@@ -68,7 +65,6 @@ class MainView: UIView {
         setUpPromptConstraints()
         setUpStackViewConstraints()
         setUpScoreLabelConstraints()
-        setUpResetButtonConstraints()
     }
     
     var randomRed = CGFloat.random(in: 0...1)
@@ -84,10 +80,6 @@ class MainView: UIView {
     }
     
     func buttonsLoad() -> [UIButton] {
-        var buttonArr = [UIButton]()
-        let redButton = UIButton()
-        let greenButton = UIButton()
-        let blueButton = UIButton()
         redButton.backgroundColor = UIColor(red: 1.0, green: 0.0, blue: 0.0, alpha: 1.0)
         redButton.setTitle("Red", for: .normal)
         redButton.tag = 0
@@ -153,15 +145,4 @@ class MainView: UIView {
         ])
     }
     
-    
-    private func setUpResetButtonConstraints() {
-        addSubview(resetButton)
-        
-        resetButton.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate([
-            resetButton.topAnchor.constraint(equalTo: scoreLabel.bottomAnchor, constant: 60),
-            resetButton.centerXAnchor.constraint(equalTo: centerXAnchor)
-        ])
-    }
 }
