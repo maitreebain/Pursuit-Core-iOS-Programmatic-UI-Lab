@@ -11,7 +11,7 @@ import UIKit
 
 class MainView: UIView {
     
-    let gamePrompt = "Pick a color most related to the options below: "
+    let gamePrompt = "Pick a color most related to the color above: "
     var scoreNum = 0
     
     var buttonArr = [UIButton]()
