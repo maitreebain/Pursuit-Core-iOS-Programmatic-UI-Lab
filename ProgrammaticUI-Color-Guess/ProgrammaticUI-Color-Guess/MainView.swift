@@ -22,20 +22,23 @@ class MainView: UIView {
     public lazy var imageView: UIImageView = {
         let image = UIImageView()
         image.backgroundColor = myColor()
+        image.layer.cornerRadius = 10
         return image
     }()
     
     public lazy var promptLabel: UILabel = {
         let prompt = UILabel()
         prompt.text = gamePrompt
+        prompt.textAlignment = .center
         return prompt
     }()
     
     public lazy var scoreLabel: UILabel = {
         let score = UILabel()
-        //score.text = "Score: \(scoreNum)"
+        score.backgroundColor = .darkGray
         score.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
         score.textAlignment = .center
+        score.textColor = .white
         return score
     }()
     

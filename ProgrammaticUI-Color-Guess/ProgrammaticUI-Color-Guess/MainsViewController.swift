@@ -16,8 +16,6 @@ class MainsViewController: UIViewController {
         view = mainView
     }
     
-    var win = false
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -31,6 +29,7 @@ class MainsViewController: UIViewController {
     private func buttonsConfiguration() {
         for button in mainView.buttonArr {
             button.addTarget(self, action: #selector(buttonColorChoice(_:)), for: .touchUpInside)
+            button.layer.cornerRadius = 10
         }
     }
     
@@ -52,7 +51,6 @@ class MainsViewController: UIViewController {
             if max(mainView.randomRed, mainView.randomBlue, mainView.randomGreen) == mainView.randomRed{
                 print("red")
                 updateScore()
-                win = true
             } else {
                 present(alertController, animated: true)
             }
@@ -60,7 +58,6 @@ class MainsViewController: UIViewController {
             if max(mainView.randomRed, mainView.randomBlue, mainView.randomGreen) == mainView.randomGreen {
                 print("green")
                 updateScore()
-                win = true
             } else {
                 present(alertController, animated: true)
             }
@@ -68,7 +65,6 @@ class MainsViewController: UIViewController {
             if max(mainView.randomRed, mainView.randomBlue, mainView.randomGreen) == mainView.randomBlue {
                 print("blue")
                 updateScore()
-                win = true
             } else {
                 present(alertController, animated: true)
                 
@@ -94,7 +90,6 @@ class MainsViewController: UIViewController {
     private func leave() {
         for button in mainView.buttonArr {
             button.isEnabled = false
-            button.titleLabel?.text = ""
         }
     }
     
