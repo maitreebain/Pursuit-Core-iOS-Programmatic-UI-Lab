@@ -34,7 +34,6 @@ class MainsViewController: UIViewController {
     }
     
     @objc private func buttonColorChoice(_ sender: UIButton){
-        buttonsConfiguration()
         let alertController = UIAlertController(title: "You lost!", message: "Would you like to play again?", preferredStyle: .alert)
         let playAgain = UIAlertAction(title: "Yes", style: .default) { (alertAction) in
             self.resetAction()
